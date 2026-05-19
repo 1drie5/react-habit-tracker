@@ -1,10 +1,13 @@
 import { Button } from "./Buttons";
 import { format, eachDayOfInterval, startOfWeek, endOfWeek, isFuture } from "date-fns"
 
-export function HabitList() {
-    const habits = [
-        {id: '1', name: "Drink water"},
-    ]
+
+export type Habit = { id: string; name: string }
+type HabitListProps = {
+    habits: Habit[]
+}
+
+export function HabitList({habits}: HabitListProps) {
     if (habits.length === 0) {
     return (
       <p className="text-center text-zinc-500 py-12">
@@ -19,7 +22,7 @@ export function HabitList() {
     </div>
 }
 type HabitItemProps = {
-    habit: {id: string, name: string}
+    habit: Habit
 }
 
 function HabitItem({ habit }: HabitItemProps) {
