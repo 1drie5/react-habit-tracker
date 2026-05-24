@@ -6,9 +6,11 @@ import { format, eachDayOfInterval, startOfWeek, endOfWeek, isFuture, isSameDay,
 // import { HabitContext } from "../context/HabitProvider";
 
 
+type HabitListProps = {
+  visibleDates: Date[]
+}
 
-
-export function HabitList() {
+export function HabitList({ visibleDates }: HabitListProps) {
   const { habits } = useHabits()
     if (habits.length === 0) {
     return (
@@ -19,24 +21,25 @@ export function HabitList() {
   }
     return <div className="flex flex-col gap-3">
       {habits.map(habit => (
-        <HabitItem key={habit.id} habit={habit}/>
+        <HabitItem key={habit.id} habit={habit} visibleDates={visibleDates}/>
       ))}
     </div>
 }
 type HabitItemProps = {
-    habit: Habit
-  }
+  habit: Habit
+  visibleDates: Date[]
+}
 
-function HabitItem({ habit }: HabitItemProps) {
+function HabitItem({ habit, visibleDates }: HabitItemProps) {
   // const habitContext = useContext(HabitContext)
   // habitContext?.name
 
   const  { deleteHabit, toggleHabit } = useHabits()
-
+  /*
   const visibleDays = eachDayOfInterval({
     start: startOfWeek(new Date(), { weekStartsOn: 1 }),
     end: endOfWeek(new Date(), { weekStartsOn: 1 }),
-  }) 
+  }) */
   
   const streak = getStreak(habit.completions)
 
@@ -54,7 +57,7 @@ function HabitItem({ habit }: HabitItemProps) {
       </div>
     
       <div className="flex gap-1.5">
-        {visibleDays.map(date => (
+        {visibleDates.map(date => (
           <Button
             className="flex flex-1 flex-col items-center gap-0.5 rounded-lg text-xs"
             key={date.toISOString()} 
