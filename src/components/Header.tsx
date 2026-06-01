@@ -21,6 +21,7 @@ export function Header({ visibleDates, onPrev, onNext }: HeaderProps) {
     <div className="flex flex-col gap-1">
       <h1 className="text-3xl font-bold">Habit Tracker</h1>
       <span className="text-zinc-400 text-sm">{doneToday} / {habits.length} done today</span>
+      <span className="text-zinc-500 text-xs">{habits.length} habit{habits.length !== 1 ? "s" : ""} </span>
     </div>
 
     <div className="flex flex-col gap-1 items-end">
