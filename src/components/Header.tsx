@@ -12,6 +12,10 @@ export function Header({ visibleDates, onPrev, onNext }: HeaderProps) {
   const doneToday = habits.filter(h => 
     h.completions.some(c =>  isToday(c)),
   ).length
+  const completionPercentage =
+  habits.length === 0
+    ? 0
+    : Math.round((doneToday / habits.length) * 100);
   
   const dateRange = `${format(visibleDates[0], "MMM d")} - ${format(visibleDates.at(-1)!, "MMM d")}`;
    
@@ -20,7 +24,7 @@ export function Header({ visibleDates, onPrev, onNext }: HeaderProps) {
   <header className="flex items-center justify-between">
     <div className="flex flex-col gap-1">
       <h1 className="text-3xl font-bold">Habit Tracker</h1>
-      <span className="text-zinc-400 text-sm">{doneToday} / {habits.length} done today</span>
+      <span className="text-zinc-400 text-sm">{doneToday} / {habits.length} done today ({completionPercentage}%) </span>
       <span className="text-zinc-500 text-xs">{habits.length} habit{habits.length !== 1 ? "s" : ""} </span>
     </div>
 
