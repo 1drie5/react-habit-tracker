@@ -5,7 +5,10 @@ import { useHabits } from "../context/useHabits";
 
 export function HabitForm() {
   const [name, setName] = useState("");
-  const { addHabit }= useHabits()
+  const { habits, addHabit } = useHabits()
+  const habitExists = habits.some(
+      h => h.name.trim().toLowerCase() === name.trim().toLowerCase(),
+    )
   
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault()
@@ -16,6 +19,7 @@ export function HabitForm() {
   }
 
   return (
+   <div> 
     <form className="flex gap-2" onSubmit={handleSubmit}>
       {name}
       <input
@@ -24,11 +28,17 @@ export function HabitForm() {
         className="flex-1 rounded-lg bg-zinc-800 px-4 py-2 outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
         placeholder="New habit..."
       />
-      <Button 
-        disabled={name.trim() === ""}
+      <Button
+        disabled={name.trim() === "" || habitExists}
         className="rounded-lg px-4 py-2 font-medium">
         Add Habit
       </Button>
     </form>
+    {habitExists && (
+      <span className="text-red-400 text-xs">
+        Habit already exists
+      </span>
+    )}
+    </div>
   )
 }
