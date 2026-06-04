@@ -12,6 +12,7 @@ export function Header({ visibleDates, onPrev, onNext }: HeaderProps) {
   const doneToday = habits.filter(h => 
     h.completions.some(c =>  isToday(c)),
   ).length
+  const now = format(new Date(), "MMM d, yyyy • h:mm a")
   const completionPercentage =
   habits.length === 0
     ? 0
@@ -26,6 +27,7 @@ export function Header({ visibleDates, onPrev, onNext }: HeaderProps) {
       <h1 className="text-3xl font-bold">Habit Tracker</h1>
       <span className="text-zinc-400 text-sm">{doneToday} / {habits.length} done today ({completionPercentage}%) </span>
       <span className="text-zinc-500 text-xs">{habits.length} habit{habits.length !== 1 ? "s" : ""} </span>
+     <span className="text-zinc-500 text-xs">{now} </span>
     </div>
 
     <div className="flex flex-col gap-1 items-end">
