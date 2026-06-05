@@ -50,10 +50,16 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
           <span className="font-medium">{habit.name}</span>
           {streak !== 0 && (<span className="text-sm text-amber-400">🔥 {streak}</span>)}
         </div>
-        <Button 
-          onClick={() => deleteHabit(habit.id)} 
-          variant="ghost-destructive" 
-          className="text-xs">Delete</Button>
+        <Button
+          onClick={() => {
+            if (!confirm("Delete habit?")) return
+              deleteHabit(habit.id)
+            }}
+          variant="ghost-destructive"
+          className="text-xs"
+        >
+        Delete
+        </Button>
       </div>
     
       <div className="flex gap-1.5">
