@@ -1,10 +1,11 @@
-import { useState, type SubmitEvent } from "react";
+import { useRef, useState, type SubmitEvent } from "react";
 import { Button } from "./Buttons";
 import { useHabits } from "../context/useHabits";
 
 
 export function HabitForm() {
   const [name, setName] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null)
   const { habits, addHabit } = useHabits()
   const habitExists = habits.some(
       h => h.name.trim().toLowerCase() === name.trim().toLowerCase(),
@@ -16,6 +17,7 @@ export function HabitForm() {
     if (name.trim() === "") return
     setName("")
     addHabit(name)
+    inputRef.current?.focus()
   }
 
   return (
@@ -23,6 +25,7 @@ export function HabitForm() {
     <form className="flex gap-2" onSubmit={handleSubmit}>
       {name}
       <input
+        ref={inputRef}
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="flex-1 rounded-lg bg-zinc-800 px-4 py-2 outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
