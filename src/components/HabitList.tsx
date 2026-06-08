@@ -43,6 +43,7 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
   }) */
   
   const streak = getStreak(habit.completions)
+  const lastCompletion = habit.completions.at(-1)
 
   return (
     <div className="rounded-xl bg-zinc-800 p-4 flex flex-col gap-3">
@@ -54,6 +55,11 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
             • {habit.completions.length} completion
               {habit.completions.length !== 1 ? "s" : ""}
           </span>
+          {lastCompletion && (
+            <span className="text-sm text-zinc-400">
+            • Last: {format(lastCompletion, "MMM d")}
+            </span>
+          )}
         </div>
         <Button
           onClick={() => {
