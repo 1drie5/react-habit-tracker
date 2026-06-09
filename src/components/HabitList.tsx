@@ -3,7 +3,7 @@ import React from "react";
 
 import { useHabits, type Habit } from "../context/useHabits";
 import { Button } from "./Buttons";
-import { format, eachDayOfInterval, startOfWeek, endOfWeek, isFuture, isSameDay, subDays } from "date-fns"
+import { format, eachDayOfInterval, startOfWeek, endOfWeek, isFuture, isSameDay, isToday, subDays } from "date-fns"
 // import { HabitContext } from "../context/HabitProvider";
 
 
@@ -76,7 +76,9 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
       <div className="flex gap-1.5">
         {visibleDates.map(date => (
           <Button
-            className="flex flex-1 flex-col items-center gap-0.5 rounded-lg text-xs"
+            className={`flex flex-1 flex-col items-center gap-0.5 rounded-lg text-xs ${
+              isToday(date) ? "ring-2 ring-amber-400" : ""
+            }`}
             key={date.toISOString()} 
             disabled={isFuture(date)}
             onClick={()=>toggleHabit(habit.id, date)}
