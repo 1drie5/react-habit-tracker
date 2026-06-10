@@ -43,13 +43,20 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
   }) */
   
   const streak = getStreak(habit.completions)
+  const perfectWeek =
+  visibleDates.every(date =>
+    habit.completions.some(c => isSameDay(c, date))
+  )
   const lastCompletion = habit.completions.at(-1)
 
   return (
     <div className="rounded-xl bg-zinc-800 p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div className="flex gap-3 items-center">
-          <span className="font-medium">{habit.name}</span>
+          <span className="font-medium">
+            {perfectWeek ? "🏆 " : ""}
+            {habit.name}
+          </span>
           {streak !== 0 && (<span className="text-sm text-amber-400">🔥 {streak}</span>)}
           <span className="text-sm text-zinc-400">
             • {habit.completions.length} completion
