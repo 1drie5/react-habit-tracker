@@ -5,6 +5,7 @@ import { useState } from "react"
 // import { isSameDay } from "date-fns"
 import { HabitProvider } from "./context/HabitProvider"
 import { addWeeks, eachDayOfInterval, endOfWeek, startOfWeek } from "date-fns"
+import { Quote } from "./components/Quote"
 
 export default function App() {
   const [weekOffset, setWeekOffset] = useState(0)
@@ -20,6 +21,7 @@ export default function App() {
         onPrev={() => setWeekOffset((o) => o - 1)}
         onNext={() => setWeekOffset((o) => o + 1)}
       />
+      <Quote />
       <HabitForm />
       <HabitList visibleDates={visibleDates} />
     </HabitProvider>
