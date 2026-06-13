@@ -3,4 +3,29 @@
 body {
     background-color: var(--color-zinc-900);
     color: var(--color-zinc-100);
+
+    /* subtle dot grid */
+    background-image:
+      radial-gradient(
+        rgba(255, 255, 255, 0.07) 1px,
+        transparent 1px
+      );
+
+    background-size: 22px 22px;
+}
+
+/* subtle violet accent glow */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(139, 92, 246, 0.12),
+        transparent 50%
+      );
+
+    pointer-events: none;
 }
