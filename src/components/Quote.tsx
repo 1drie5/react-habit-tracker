@@ -23,20 +23,21 @@ export function Quote() {
   if (!quote) return <p>Loading quote...</p>
 
   return (
-    <div className="rounded-lg bg-zinc-800 p-4 flex flex-col gap-3">
+    <div className="rounded-lg bg-zinc-800/70 backdrop-blur-sm border border-zinc-700/50 p-4">
       <p className="italic">"{quote.content}"</p>
 
       <p className="text-sm text-zinc-400">
         — {quote.author}
       </p>
 
-      <Button
-        variant="primary"
-        onClick={fetchQuote}
-        className="self-start"
-      >
-        New Quote
-      </Button>
+        <div className="flex justify-end">
+          <Button
+            variant="primary"
+            onClick={fetchQuote}
+          >
+            New Quote
+          </Button>
+        </div>
     </div>
   )
 }

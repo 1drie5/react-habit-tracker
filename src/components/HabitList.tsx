@@ -50,7 +50,7 @@ function HabitItem({ habit, visibleDates }: HabitItemProps) {
   const lastCompletion = habit.completions.at(-1)
 
   return (
-    <div className="rounded-xl bg-zinc-800 p-4 flex flex-col gap-3">
+    <div className="rounded-xl bg-zinc-800/70 backdrop-blur-sm border border-zinc-700/50 p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div className="flex gap-3 items-center">
           <span className="font-medium">
